@@ -18,12 +18,104 @@
       </nav>
     </header>
     <main>
-      <section id="weather-section">
-        <h2>Enter your zipcode to get started</h2>
+      <section id="weather-section" class="blurred">
+        <!-- <h2>Enter your zipcode to get started</h2>
         <form>
           <input type="text" placeholder="zipcode" required>
           <button type="submit">Submit</button>
-        </form>
+        </form> -->
+        <article class="current-weather-section">
+          <div id="weather-header">
+            <div class="weather-header_left">
+              <img class="weather-icon large" src="images/weather-icons/cloud-sun-solid.svg" data-current-icon />
+              <div class="header-current-temp">
+                <span data-current-temp>31</span>&deg;
+              </div>
+            </div>
+            <div class="weather-header_right">
+              <div class="info-group">
+                <div class="label">High</div>
+                <div><span data-current-high>40</span>&deg;</div>
+              </div>
+              <div class="info-group">
+                <div class="label">Humidity</div>
+                <div><span data-current-humidity>32</span>%</div>
+              </div>
+              <div class="info-group">
+                <div class="label">Wind</div>
+                <div><span data-current-wind>4</span> <span class="value-sub-info">mph</span></div>
+              </div>
+              <div class="info-group">
+                <div class="label">Low</div>
+                <div><span data-current-low>28</span>&deg;</div>
+              </div>
+              <div class="info-group">
+                <div class="label">UV Index</div>
+                <div><span data-current-uv-index>0</span></div>
+              </div>
+              <div class="info-group">
+                <div class="label">Precip</div>
+                <div><span data-current-precip>0.01</span> <span class="value-sub-info">in</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="current-location">
+            <h3 data-curent-location>Trabuco Canyon, CA</h3>
+          </div>
+        </article>
+        <article class="forecast-section" data-day-section>
+          <div class="day-card">
+            <img src="images/weather-icons/cloud-solid.svg" alt="weather icon" class="weather-icon"/>
+            <div class="day-card_date">Monday</div>
+            <div class="day-card_high">H: 32&deg;</div>
+            <div class="day-card_low">L: 26&deg;</div>
+          </div>
+          <div class="day-card">
+            <img src="images/weather-icons/cloud-solid.svg" alt="weather icon" class="weather-icon"/>
+            <div class="day-card_date">Tuesday</div>
+            <div class="day-card_high">H: 32&deg;</div>
+            <div class="day-card_low">L: 26&deg;</div>
+          </div>
+          <div class="day-card">
+            <img src="images/weather-icons/cloud-solid.svg" alt="weather icon" class="weather-icon"/>
+            <div class="day-card_date">Wednesday</div>
+            <div class="day-card_high">H: 32&deg;</div>
+            <div class="day-card_low">L: 26&deg;</div>
+          </div>
+          <div class="day-card">
+            <img src="images/weather-icons/cloud-solid.svg" alt="weather icon" class="weather-icon"/>
+            <div class="day-card_date">Thursday</div>
+            <div class="day-card_high">H: 32&deg;</div>
+            <div class="day-card_low">L: 26&deg;</div>
+          </div>
+          <div class="day-card">
+            <img src="images/weather-icons/cloud-solid.svg" alt="weather icon" class="weather-icon"/>
+            <div class="day-card_date">Friday</div>
+            <div class="day-card_high">H: 32&deg;</div>
+            <div class="day-card_low">L: 26&deg;</div>
+          </div>
+          <div class="day-card">
+            <img src="images/weather-icons/cloud-solid.svg" alt="weather icon" class="weather-icon"/>
+            <div class="day-card_date">Saturday</div>
+            <div class="day-card_high">H: 32&deg;</div>
+            <div class="day-card_low">L: 26&deg;</div>
+          </div>
+          <div class="day-card">
+            <img src="images/weather-icons/cloud-solid.svg" alt="weather icon" class="weather-icon"/>
+            <div class="day-card_date">Sunday</div>
+            <div class="day-card_high">H: 32&deg;</div>
+            <div class="day-card_low">L: 26&deg;</div>
+          </div>
+        </article>
+
+        <template id="day-card-template">
+          <div class="day-card">
+            <img data-icon alt="weather icon" class="weather-icon"/>
+            <div class="day-card_date" data-date></div>
+            <div class="day-card_high"><span>H: </span><span data-temp-high>32</span><span>&deg;</span></div>
+            <div class="day-card_low"><span>H: </span><span data-temp-low>32</span><span>&deg;</span></div>
+          </div>
+        </template>
       </section>
     </main>
     <footer>
