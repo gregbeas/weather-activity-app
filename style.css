@@ -206,6 +206,8 @@ footer {
  #weather-header {
   display: flex;
   align-items: center;
+  border-bottom: 2px solid var(--color-gray);
+  margin-bottom: 1rem;
  }
 
  .weather-header_left {
@@ -215,7 +217,6 @@ footer {
   justify-content: center;
   margin: 0.5rem;
   padding: 0.5rem;
-  border-right: 2px solid var(--color-gray)
  }
 
  .weather-icon {
@@ -237,7 +238,7 @@ footer {
  .weather-header_right {
   display: grid;
   width: 50%;
-  justify-content: space-around;
+  justify-content: space-evenly;
   gap: 0.5rem;
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(2, auto);
