@@ -182,7 +182,7 @@ footer {
   text-align: center;
  }
 
- /* form {
+ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -201,7 +201,7 @@ footer {
   font-weight: 700;
   margin-bottom: 2rem;
   width: 100%;
- } */
+ }
 
  #weather-header {
   display: flex;
@@ -301,6 +301,31 @@ footer {
   margin: 0 auto;
  }
 
+ /* MEDIA QUERIES */
+
+@media only screen and (min-width: 40em) {
+  section {
+    width: 85%;
+  }
+}
+
+@media only screen and (min-width: 48em) {
+  section {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  section {
+    width: 65%;
+  }
+}
+
+@media only screen and (min-width: 80em) {
+  section {
+    width: 50%;
+  }
+}
 
 
 
