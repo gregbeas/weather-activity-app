@@ -1,54 +1,76 @@
-import axios from "axios"
+import axios from 'axios';
 
-export function getWeather(lat, lon, timezone) {
-  return axios.get("https://api.open-meteo.com/v1/forecast?current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,uv_index&daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,precipitation_sum&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timeformat=unixtime", {params: {
-    latitude: lat,
-    longitude: lon,
-    timezone,
-  }})
-  .then(({data}) => {
-    return {
-      current: parseCurrentWeather(data),
-      daily: parseDailyWeather(data),
-    }
+import { getWeather } from './getWeather'
+import { ICON_MAP } from './iconMap';
+
+navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
+
+function positionSuccess({coords}) {
+  getWeather(coords.latitude, coords.longitude, Intl.DateTimeFormat().resolvedOptions().timeZone)
+    .then(getLocation(coords.latitude, coords.longitude))
+    .then(renderWeather)
+    .catch(e => {
+      console.error(e);
+      alert("Error getting weather data for your location.")
+    })
+}
+
+function positionError() {
+  alert('There was an error accessing your location. Please check browser permisions and refresh the page.')
+}
+
+function getLocation(lat, lon) {
+  return axios.get(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`)
+  .then(res => {
+    currentLocation.innerHTML = `${res.data.locality}, ${res.data.principalSubdivision}`;
   })
 }
 
-function parseCurrentWeather({current, daily}) {
+const currentLocation = document.querySelector('[data-current-location]');
 
-  const {
-    temperature_2m: currentTemp,
-    wind_speed_10m: windSpeed,
-    weather_code: iconCode,
-    relative_humidity_2m: humidity
-  } = current
-
-  const {
-    temperature_2m_max: [maxTemp],
-    temperature_2m_min: [minTemp],
-    uv_index_max: [uvIndex],
-    precipitation_sum: [precip]
-  } = daily
-
-  return {
-    currentTemp: Math.round(currentTemp),
-    highTemp: Math.round(maxTemp),
-    lowTemp: Math.round(minTemp),
-    humidity: Math.round(humidity),
-    windSpeed: Math.round(windSpeed),
-    uvIndex: Math.round(uvIndex),
-    precip: Math.round(precip * 100) / 100,
-    iconCode,
-  }
+function renderWeather({current, daily}) {
+  renderCurrentWeather(current);
+  renderDailyWeather(daily);
+  document.getElementById('weather-section').classList.remove('blurred');
 }
 
-function parseDailyWeather({daily}) {
-  return daily.time.map((time, index) => {
-    return {
-      timestamp: time * 1000,
-      iconCode: daily.weather_code[index],
-      maxTemp: Math.round(daily.temperature_2m_max[index]),
-      minTemp: Math.round(daily.temperature_2m_min[index])
-    }
+function setValue(selector, value, {parent = document} = {}) {
+  parent.querySelector(`[data-${selector}]`).textContent = value;
+}
+
+function getIconUrl(iconCode) {
+  return `images/weather-icons/${ICON_MAP.get(iconCode)}.svg`
+}
+
+const currentIcon = document.querySelector('[data-current-icon]');
+
+function renderCurrentWeather(current) {
+  currentIcon.src = getIconUrl(current.iconCode);
+  setValue('current-temp', current.currentTemp);
+  setValue('current-high', current.highTemp);
+  setValue('current-low', current.lowTemp);
+  setValue('current-humidity', current.humidity);
+  setValue('current-wind', current.windSpeed);
+  setValue('current-uv-index', current.uvIndex);
+  setValue('current-precip', current.precip);
+}
+
+const DAY_FORMATTER = new Intl.DateTimeFormat(undefined, {weekday: 'long'});
+
+const dailySection = document.querySelector('[data-day-section]');
+const dayCardTemplate = document.getElementById('day-card-template');
+
+function renderDailyWeather(daily) {
+  dailySection.innerHTML = '';
+  daily.forEach(day => {
+    const element = dayCardTemplate.content.cloneNode(true);
+    setValue('temp-high', day.maxTemp, {parent: element});
+    setValue('temp-low', day.minTemp, {parent: element});
+    setValue('date', DAY_FORMATTER.format(day.timestamp), {parent: element});
+    element.querySelector('[data-icon]').src = getIconUrl(day.iconCode);
+    dailySection.append(element);
   })
 }
+
+
+
