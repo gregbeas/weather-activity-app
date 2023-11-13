@@ -65,6 +65,8 @@ p {
 
 #footer-text {
   font-size: 16px;
+  max-width: 85%;
+  margin-inline: auto;
 }
 
 button {
