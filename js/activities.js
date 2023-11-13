@@ -35,7 +35,7 @@ function getRandomActivity() {
   const randomNummber = Math.floor(Math.random() * 4);
 
   if ((activityWeatherCode === 0 || activityWeatherCode === 1 || activityWeatherCode === 2 || activityWeatherCode === 3 || activityWeatherCode === 45) && activityTemp > 60) {
-    return axios.get('http://www.boredapi.com/api/activity/')
+    return axios.get('https://www.boredapi.com/api/activity/')
     .then((res) => {
       randomActivity = res.data.activity;
       console.log(randomActivity);
@@ -45,7 +45,7 @@ function getRandomActivity() {
     })
   } else {
     if (randomNumber === 0) {
-      return axios.get('http://www.boredapi.com/api/activity?type=education')
+      return axios.get('https://www.boredapi.com/api/activity?type=education')
       .then(() => {
         randomActivity = res.data.activity;
         console.log(randomActivity);
@@ -54,7 +54,7 @@ function getRandomActivity() {
         updateActivity(randomActivity);
       })
     } else if (randomNumber === 1) {
-      return axios.get('http://www.boredapi.com/api/activity?type=cooking')
+      return axios.get('https://www.boredapi.com/api/activity?type=cooking')
       .then(() => {
         randomActivity = res.data.activity;
         console.log(randomActivity);
@@ -63,7 +63,7 @@ function getRandomActivity() {
         updateActivity(randomActivity);
       })
     } else if (randomNumber === 2) {
-      return axios.get('http://www.boredapi.com/api/activity?type=busywork')
+      return axios.get('https://www.boredapi.com/api/activity?type=busywork')
       .then(() => {
         randomActivity = res.data.activity;
         console.log(randomActivity);
@@ -72,7 +72,7 @@ function getRandomActivity() {
         updateActivity(randomActivity);
       })
     } else if (randomNumber === 3) {
-      return axios.get('http://www.boredapi.com/api/activity?type=music')
+      return axios.get('https://www.boredapi.com/api/activity?type=music')
       .then(() => {
         randomActivity = res.data.activity;
         console.log(randomActivity);
