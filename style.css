@@ -84,6 +84,7 @@ button {
   max-width: 500px;
   cursor: pointer;
   border: none;
+  color: var(--color-black);
 }
 
 button:hover, button:active, button:focus {
