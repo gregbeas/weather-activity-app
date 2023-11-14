@@ -32,7 +32,7 @@ let randomActivity;
 
 //function to get random activity based on weather
 function getRandomActivity() {
-  const randomNummber = Math.floor(Math.random() * 4);
+  const randomNumber = Math.floor(Math.random() * 4);
 
   if ((activityWeatherCode === 0 || activityWeatherCode === 1 || activityWeatherCode === 2 || activityWeatherCode === 3 || activityWeatherCode === 45) && activityTemp > 60) {
     return axios.get('https://www.boredapi.com/api/activity/')
@@ -46,7 +46,7 @@ function getRandomActivity() {
   } else {
     if (randomNumber === 0) {
       return axios.get('https://www.boredapi.com/api/activity?type=education')
-      .then(() => {
+      .then((res) => {
         randomActivity = res.data.activity;
         console.log(randomActivity);
       })
@@ -55,25 +55,25 @@ function getRandomActivity() {
       })
     } else if (randomNumber === 1) {
       return axios.get('https://www.boredapi.com/api/activity?type=cooking')
-      .then(() => {
+      .then((res) => {
         randomActivity = res.data.activity;
         console.log(randomActivity);
       })
-      .then(() => {
+      .then((res) => {
         updateActivity(randomActivity);
       })
     } else if (randomNumber === 2) {
       return axios.get('https://www.boredapi.com/api/activity?type=busywork')
-      .then(() => {
+      .then((res) => {
         randomActivity = res.data.activity;
         console.log(randomActivity);
       })
-      .then(() => {
+      .then((res) => {
         updateActivity(randomActivity);
       })
     } else if (randomNumber === 3) {
       return axios.get('https://www.boredapi.com/api/activity?type=music')
-      .then(() => {
+      .then((res) => {
         randomActivity = res.data.activity;
         console.log(randomActivity);
       })
@@ -106,7 +106,7 @@ function getActivityWeather(lat, lon, timezone) {
     }).then(() => {
       activityDataTemp.innerHTML = activityTemp;
       if (activityWeatherCode === 0 || activityWeatherCode === 1) {
-        activityDataWeather.innerHTML = 'sunny';
+        activityDataWeather.innerHTML = 'clear skies';
       } else if (activityWeatherCode === 2 || activityWeatherCode === 3 || activityWeatherCode === 45 || activityWeatherCode === 48) {
         activityDataWeather.innerHTML = 'cloudy';
       } else if (activityWeatherCode === 51 || activityWeatherCode === 53 || activityWeatherCode === 55) {
