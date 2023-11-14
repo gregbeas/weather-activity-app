@@ -30,6 +30,8 @@ To host the application locally follow the steps below:
 
 3. In the terminal, run command `npm run dev`, and follow the steps in your terminal to open localhost in your browser
 
+4. To run a production version of the application run command `npm run build` to build the project and create the distriubution folder, then run command `npm run preview` and follow the steps in your terminal to open localhost in your browser.
+
 
 
 
